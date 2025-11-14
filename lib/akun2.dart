@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'editprofil2.dart';
+import 'editprofil1.dart';
 import 'login_page.dart';
+import 'dashboard.dart';
+import 'katasandi1.dart';
+import 'aktivitas.dart';
+import 'tambahpanen.dart';
 
 class AccountPage2 extends StatelessWidget {
   const AccountPage2({super.key});
@@ -11,9 +15,14 @@ class AccountPage2 extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text("Keluar dari akun Anda?"),
-          content: const Text("Semua draf yang anda simpan akan tetap tersedia di perangkat ini."),
+          content: const Text(
+            "Semua draf yang anda simpan akan tetap tersedia di perangkat ini.",
+          ),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(context), child: const Text("Kembali")),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Kembali"),
+            ),
             TextButton(
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
@@ -36,12 +45,16 @@ class AccountPage2 extends StatelessWidget {
       backgroundColor: const Color(0xFFFFF8E1),
       appBar: AppBar(
         backgroundColor: const Color(0xFF009688),
-        title: const Text("Akun Saya", style: TextStyle(color: Colors.white)),
+        title: const Text(
+          "Akun Saya",
+          style: TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // PROFIL
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
@@ -59,21 +72,27 @@ class AccountPage2 extends StatelessWidget {
                     backgroundImage: AssetImage('assets/images/download (3).jpg'),
                   ),
                   const SizedBox(height: 10),
-                  const Text("Suryani",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  const Text("suryanimil@gmail.com"),
-                  const Text("Petani Jagung 🌽"),
-                  const Text("Telp: 082233445566"),
+                  const Text(
+                    "Suryani",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const Text("Suryanimil@gmail.com"),
+                  const Text("Pengusaha"),
+                  const Text("Telp: 081344897661"),
                   const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const EditProfilPage2()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const EditProfilPage()),
+                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green,
                       foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
                     child: const Text("Edit Profil"),
                   ),
@@ -81,36 +100,63 @@ class AccountPage2 extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            _buildMenu(Icons.add_circle_outline, "Tambahkan Panen"),
-            _buildMenu(Icons.history, "Riwayat Aktivitas"),
-            _buildMenu(Icons.lock_outline, "Kata Sandi"),
+
+            // MENU LIST
+            _buildMenu(Icons.add_circle_outline, "Tambahkan Panen", onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const TambahPanenPage()),
+              );
+            }),
+            _buildMenu(Icons.history, "Riwayat Aktivitas", onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AktivitasPage()),
+              );
+            }),
+            _buildMenu(Icons.lock_outline, "Kata Sandi", onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const KataSandi1()),
+              );
+            }),
             _buildMenu(Icons.logout, "Keluar", onTap: () => _showLogoutDialog(context)),
           ],
         ),
       ),
-      bottomNavigationBar: _buildBottomBar(),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: const Color(0xFF009688),
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white70,
+        currentIndex: 2,
+        onTap: (index) {
+          if (index == 0) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const DashboardPage()),
+            );
+          } else if (index == 1) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => const AktivitasPage()),
+            );
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
+          BottomNavigationBarItem(icon: Icon(Icons.analytics), label: 'Data'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Akun'),
+        ],
+      ),
     );
   }
 
-  Widget _buildMenu(IconData icon, String title, {VoidCallback? onTap}) {
+  static Widget _buildMenu(IconData icon, String title, {VoidCallback? onTap}) {
     return ListTile(
       leading: Icon(icon, color: Colors.green[900]),
       title: Text(title),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
       onTap: onTap,
-    );
-  }
-
-  Widget _buildBottomBar() {
-    return BottomNavigationBar(
-      backgroundColor: const Color(0xFF009688),
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.white70,
-      items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
-        BottomNavigationBarItem(icon: Icon(Icons.analytics), label: 'Data'),
-        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Akun'),
-      ],
     );
   }
 }

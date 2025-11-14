@@ -23,7 +23,7 @@ class PopupNomor extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/images/logo (2).jpg', height: 80),
+                Image.asset('assets/images/logo (2).png', height: 80),
                 const SizedBox(height: 10),
                 const Text(
                   "KAWAL KEBUN",

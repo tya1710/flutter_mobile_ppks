@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'katasandi2.dart'; // ke halaman berikutnya
 
 class KataSandi1 extends StatefulWidget {
   const KataSandi1({super.key});
@@ -71,11 +72,9 @@ class _KataSandi1State extends State<KataSandi1> {
                   elevation: 0,
                 ),
                 onPressed: () {
-                  // Aksi tombol ubah sandi
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Kata sandi diubah!'),
-                    ),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const KataSandi2()),
                   );
                 },
                 child: const Text('Ubah sandi'),

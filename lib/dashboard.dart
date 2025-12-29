@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart'; // ⭐ DITAMBAHKAN
+
 import 'akun1.dart';
 import 'catatpanen.dart';
 import 'dokumentasi.dart';
 import 'grafik_cpo.dart';
 import 'grafik_tbs.dart';
-import 'tambahpanen.dart';
 import 'laporan.dart';
 import 'sewa_agronomis.dart';
 import 'catatrawat.dart';
 import 'daftar_kebun.dart';
-import 'pengawal.dart'; // ✅ Tambahkan import pengawal.dart
+import 'pengawal.dart';
 import 'riwayat.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -28,27 +29,11 @@ class _DashboardPageState extends State<DashboardPage> {
     const AccountPage1(),
   ];
 
+  // ⭐ DIPERBAIKI: cukup ganti index, tidak perlu Navigator
   void _onItemTapped(int index) {
-    if (index == 0) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const DashboardPage()),
-      );
-    } else if (index == 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const RiwayatPage()),
-      );
-    } else if (index == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const AccountPage1()),
-      );
-    } else {
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   @override
@@ -76,6 +61,11 @@ class DashboardContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ⭐ AMBIL DATA USER GOOGLE YANG SEDANG LOGIN
+    final user = FirebaseAuth.instance.currentUser;
+    final displayName = user?.displayName ?? 'User';
+    final photoUrl = user?.photoURL;
+
     return Scaffold(
       backgroundColor: const Color(0xFFFFF8E1),
       body: SafeArea(
@@ -85,7 +75,8 @@ class DashboardContent extends StatelessWidget {
               // ================= HEADER ==================
               Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 decoration: const BoxDecoration(
                   color: Colors.green,
                 ),
@@ -97,19 +88,26 @@ class DashboardContent extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const AccountPage1()),
+                          MaterialPageRoute(
+                              builder: (context) => const AccountPage1()),
                         );
                       },
                       child: Row(
-                        children: const [
+                        children: [
                           CircleAvatar(
                             radius: 18,
-                            backgroundImage: AssetImage('assets/images/@jimmyyjp.jpg'),
+                            // ⭐ PAKAI FOTO GOOGLE KALAU ADA, KALAU TIDAK PAKAI ASSET LAMA
+                            backgroundImage: (photoUrl != null &&
+                                    photoUrl.isNotEmpty)
+                                ? NetworkImage(photoUrl)
+                                : const AssetImage(
+                                        'assets/images/@jimmyyjp.jpg')
+                                    as ImageProvider,
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           Text(
-                            "Halo, User",
-                            style: TextStyle(
+                            "Halo, $displayName", // ⭐ NAMA DIAMBIL DARI AKUN GOOGLE
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
@@ -146,7 +144,9 @@ class DashboardContent extends StatelessWidget {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const GrafikCPOPage()),
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const GrafikCPOPage()),
                                 );
                               },
                               child: _infoCard(
@@ -162,7 +162,9 @@ class DashboardContent extends StatelessWidget {
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => const GrafikTBSPage()),
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const GrafikTBSPage()),
                                 );
                               },
                               child: _infoCard(
@@ -199,25 +201,34 @@ class DashboardContent extends StatelessWidget {
                             _menuItem(Icons.nature, "Kebun Saya", onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const DaftarKebunPage()),
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const DaftarKebunPage()),
                               );
                             }),
                             _menuItem(Icons.agriculture, "Panen", onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const CatatPanenPage()),
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const CatatPanenPage()),
                               );
                             }),
                             _menuItem(Icons.grass, "Rawat", onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const CatatRawatPage()),
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const CatatRawatPage()),
                               );
                             }),
-                            _menuItem(Icons.camera_alt, "Dokumentasi", onTap: () {
+                            _menuItem(Icons.camera_alt, "Dokumentasi",
+                                onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const DokumentasiPage()),
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const DokumentasiPage()),
                               );
                             }),
                           ],
@@ -245,17 +256,22 @@ class DashboardContent extends StatelessWidget {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           children: [
-                            // 🟢 Di sini kita arahkan ke PengawalPage()
-                            _menuItem(Icons.local_florist, "Pengawal Sawit", onTap: () {
+                            _menuItem(Icons.local_florist, "Pengawal Sawit",
+                                onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const PengawalPage()),
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const PengawalPage()),
                               );
                             }),
-                            _menuItem(Icons.engineering, "Sewa Agronomis", onTap: () {
+                            _menuItem(Icons.engineering, "Sewa Agronomis",
+                                onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const SewaAgronomisPage()),
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const SewaAgronomisPage()),
                               );
                             }),
                           ],
@@ -298,7 +314,9 @@ class DashboardContent extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => const LaporanPage()),
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LaporanPage()),
                                   );
                                 },
                                 child: const Text("Lihat Detail"),
@@ -330,7 +348,9 @@ class DashboardContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+          Text(title,
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
           const SizedBox(height: 6),
           Text(price, style: const TextStyle(color: Colors.red, fontSize: 13)),
           const SizedBox(height: 6),
@@ -367,7 +387,9 @@ class DashboardContent extends StatelessWidget {
           children: [
             Icon(icon, color: Colors.orange, size: 35),
             const SizedBox(height: 6),
-            Text(label, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500)),
+            Text(label,
+                style: const TextStyle(
+                    fontSize: 13, fontWeight: FontWeight.w500)),
           ],
         ),
       ),

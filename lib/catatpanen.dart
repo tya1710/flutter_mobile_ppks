@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'tambahpanen.dart';
+import 'data_catat_panen.dart'; // ← penting
 
 class CatatPanenPage extends StatelessWidget {
   const CatatPanenPage({super.key});
@@ -20,7 +21,7 @@ class CatatPanenPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            // =================== APPBAR CUSTOM (TINGGI NORMAL) ===================
+            // =================== APPBAR ===================
             PreferredSize(
               preferredSize: const Size.fromHeight(56),
               child: Container(
@@ -82,9 +83,17 @@ class CatatPanenPage extends StatelessWidget {
                           SizedBox(
                             width: double.infinity,
                             child: OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const DataCatatPanenPage(),
+                                  ),
+                                );
+                              },
                               style: OutlinedButton.styleFrom(
-                                side: const BorderSide(color: Color(0xFF00994D)),
+                                side:
+                                    const BorderSide(color: Color(0xFF00994D)),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8),
                                 ),
@@ -112,18 +121,18 @@ class CatatPanenPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
 
-                    // ================== CARD DATA (BORDER PUTIH) ===================
+                    // ================== CARD DATA ===================
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Colors.white, width: 3), // <-- border putih
+                        border: Border.all(color: Colors.white, width: 3),
                       ),
-                      child: Column(
+                      child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -137,7 +146,9 @@ class CatatPanenPage extends StatelessWidget {
                               Text(
                                 "date",
                                 style: TextStyle(
-                                    color: Colors.black54, fontSize: 13),
+                                  color: Colors.black54,
+                                  fontSize: 13,
+                                ),
                               ),
                             ],
                           ),
@@ -147,9 +158,11 @@ class CatatPanenPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text("Total Berat", style: TextStyle(fontSize: 13)),
-                              Text("Kg",
-                                  style: TextStyle(
-                                      fontSize: 13, color: Colors.black54)),
+                              Text(
+                                "Kg",
+                                style:
+                                    TextStyle(fontSize: 13, color: Colors.black54),
+                              ),
                             ],
                           ),
                           SizedBox(height: 8),
@@ -158,9 +171,11 @@ class CatatPanenPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text("Harga TBS/KG", style: TextStyle(fontSize: 13)),
-                              Text("Rp.",
-                                  style: TextStyle(
-                                      fontSize: 13, color: Colors.black54)),
+                              Text(
+                                "Rp.",
+                                style:
+                                    TextStyle(fontSize: 13, color: Colors.black54),
+                              ),
                             ],
                           ),
                         ],

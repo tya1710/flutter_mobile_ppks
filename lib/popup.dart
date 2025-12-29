@@ -19,7 +19,7 @@ class PopupGooglePage extends StatelessWidget {
 
                 // Logo & Judul
                 Image.asset(
-                  'assets/images/logo (2).png',
+                  'assets/images/logo.png',
                   height: 90,
                 ),
                 const SizedBox(height: 10),

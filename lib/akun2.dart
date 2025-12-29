@@ -27,7 +27,8 @@ class AccountPage2 extends StatelessWidget {
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  MaterialPageRoute(builder: (context) => LoginPage())
+,
                   (route) => false,
                 );
               },

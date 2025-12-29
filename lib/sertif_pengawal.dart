@@ -1,7 +1,8 @@
-import 'dart:html' as html;
 import 'package:flutter/material.dart';
-import 'riwayat.dart'; // ✅ pastikan file riwayat.dart sudah ada
-import 'akun1.dart'; // ✅ tambahkan ini agar bisa navigasi ke halaman akun
+import 'package:file_picker/file_picker.dart';
+
+import 'riwayat.dart';
+import 'akun1.dart';
 
 class SertifPengawalPage extends StatelessWidget {
   const SertifPengawalPage({super.key});
@@ -57,9 +58,9 @@ class SertifPengawalPage extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Row(
+                    child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
+                      children: [
                         Icon(Icons.add_circle_outline, color: Colors.black),
                         SizedBox(width: 8),
                         Text(
@@ -90,19 +91,17 @@ class SertifPengawalPage extends StatelessWidget {
         ),
       ),
 
-      // ✅ Perubahan di sini
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 1, // index 1 = bagian tengah (chart)
+        currentIndex: 1,
         onTap: (index) {
           if (index == 0) {
-            Navigator.pop(context); // kembali ke halaman sebelumnya
+            Navigator.pop(context);
           } else if (index == 1) {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const RiwayatPage()),
             );
           } else if (index == 2) {
-            // ✅ Navigasi ke halaman akun
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => const AccountPage1()),
@@ -119,7 +118,10 @@ class SertifPengawalPage extends StatelessWidget {
   }
 }
 
-// 🟢 Halaman Tambah Sertifikat (upload file)
+// =============================
+// 🔹 Halaman Upload Sertifikat
+// =============================
+
 class TambahSertifPage extends StatefulWidget {
   const TambahSertifPage({super.key});
 
@@ -130,23 +132,24 @@ class TambahSertifPage extends StatefulWidget {
 class _TambahSertifPageState extends State<TambahSertifPage> {
   String? _fileName;
 
-  void _uploadFile() {
-    final uploadInput = html.FileUploadInputElement();
-    uploadInput.accept = '.pdf,.jpg,.jpeg,.png';
-    uploadInput.click();
+  Future<void> _uploadFile() async {
+    final result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf', 'jpg', 'png', 'jpeg'],
+    );
 
-    uploadInput.onChange.listen((event) {
-      final file = uploadInput.files!.first;
+    if (result != null && result.files.isNotEmpty) {
       setState(() {
-        _fileName = file.name;
+        _fileName = result.files.first.name;
       });
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('File "${file.name}" berhasil dipilih!'),
+          content: Text('File "${result.files.first.name}" berhasil dipilih!'),
           backgroundColor: Colors.green[700],
         ),
       );
-    });
+    }
   }
 
   @override

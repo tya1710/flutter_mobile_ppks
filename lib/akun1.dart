@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'editprofil1.dart';
 import 'login_page.dart';
-import 'dashboard.dart';
 import 'katasandi1.dart';
 import 'aktivitas.dart';
-import 'tambahpanen.dart'; 
-import 'riwayat.dart'; // ⬅️ pastikan impor ini ada
+import 'tambahpanen.dart';
 
 class AccountPage1 extends StatelessWidget {
   const AccountPage1({super.key});
@@ -28,7 +26,7 @@ class AccountPage1 extends StatelessWidget {
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => const LoginPage()),
+                  MaterialPageRoute(builder: (context) => LoginPage()),
                   (route) => false,
                 );
               },
@@ -75,8 +73,10 @@ class AccountPage1 extends StatelessWidget {
                   const SizedBox(height: 10),
                   const Text(
                     "Haryanto",
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const Text("haryantoayy@gmail.com"),
                   const Text("Petani Cabe 🌶️"),
@@ -87,7 +87,8 @@ class AccountPage1 extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const EditProfilPage()),
+                          builder: (context) => const EditProfilPage(),
+                        ),
                       );
                     },
                     style: ElevatedButton.styleFrom(
@@ -109,19 +110,24 @@ class AccountPage1 extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const TambahPanenPage()),
+                  builder: (context) => const TambahPanenPage(),
+                ),
               );
             }),
             _buildMenu(Icons.history, "Riwayat Aktivitas", onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AktivitasPage()),
+                MaterialPageRoute(
+                  builder: (context) => const AktivitasPage(),
+                ),
               );
             }),
             _buildMenu(Icons.lock_outline, "Kata Sandi", onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const KataSandi1()),
+                MaterialPageRoute(
+                  builder: (context) => const KataSandi1(),
+                ),
               );
             }),
             _buildMenu(Icons.logout, "Keluar",
@@ -129,54 +135,9 @@ class AccountPage1 extends StatelessWidget {
           ],
         ),
       ),
-
-      // 🔽 Bottom Navigation Diperbaiki
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 8,
-        color: const Color(0xFF009688),
-        child: SizedBox(
-          height: 60,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              // Tombol kiri → Dashboard
-              IconButton(
-                icon: const Icon(Icons.home, color: Colors.white),
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const DashboardPage()),
-                  );
-                },
-              ),
-              const SizedBox(width: 40), // ruang buat tombol tengah
-              // Tombol kanan → Akun (aktif)
-              IconButton(
-                icon: const Icon(Icons.person, color: Colors.white),
-                onPressed: () {},
-              ),
-            ],
-          ),
-        ),
-      ),
-
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.white,
-        child: const Icon(Icons.bar_chart, color: Colors.green),
-        onPressed: () {
-          // ⬇️ Kalau pencet tombol tengah → buka RiwayatPage (riwayat.dart)
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const RiwayatPage()),
-          );
-        },
-      ),
     );
   }
 
-  // 🔸 Widget untuk item menu
   static Widget _buildMenu(IconData icon, String title, {VoidCallback? onTap}) {
     return ListTile(
       leading: Icon(icon, color: Colors.green[900]),

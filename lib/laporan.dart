@@ -101,19 +101,19 @@ class LaporanPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               elevation: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(14),
+              child: const Padding(
+                padding: EdgeInsets.all(14),
                 child: Column(
                   children: [
-                    const Text(
+                    Text(
                       "Pendapatan Bersih Anda",
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 15,
                       ),
                     ),
-                    const SizedBox(height: 5),
-                    const Text(
+                    SizedBox(height: 5),
+                    Text(
                       "Rp.",
                       style: TextStyle(
                         fontSize: 20,
@@ -121,17 +121,17 @@ class LaporanPage extends StatelessWidget {
                         color: Colors.green,
                       ),
                     ),
-                    const Divider(thickness: 1),
+                    Divider(thickness: 1),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text("Total Pendapatan"),
                         Text("Rp."),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text("Total Pengeluaran"),
                         Text("Rp."),
                       ],
@@ -166,8 +166,8 @@ class LaporanPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 elevation: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
+                child: const Padding(
+                  padding: EdgeInsets.all(12),
                   child: Column(
                     children: [
                       Row(
@@ -175,7 +175,7 @@ class LaporanPage extends StatelessWidget {
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
+                              children: [
                                 Text(
                                   "Nama",
                                   style: TextStyle(fontWeight: FontWeight.w500),
@@ -185,13 +185,13 @@ class LaporanPage extends StatelessWidget {
                               ],
                             ),
                           ),
-                          const Icon(Icons.arrow_forward_ios, size: 18),
+                          Icon(Icons.arrow_forward_ios, size: 18),
                         ],
                       ),
-                      const Divider(thickness: 1),
+                      Divider(thickness: 1),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text("Pendapatan Bersih",
                               style: TextStyle(fontWeight: FontWeight.w600)),
                           Text("Rp."),
@@ -199,14 +199,14 @@ class LaporanPage extends StatelessWidget {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text("Total Pendapatan"),
                           Text("Rp."),
                         ],
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: const [
+                        children: [
                           Text("Total Pengeluaran"),
                           Text("Rp."),
                         ],

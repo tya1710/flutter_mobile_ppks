@@ -29,8 +29,11 @@ class _KataSandi2State extends State<KataSandi2> {
           },
         ),
       ),
+
+      // ------------------- Perbaikan bagian body -------------------
       body: Container(
         width: double.infinity,
+        height: MediaQuery.of(context).size.height, // Tambahan untuk full screen
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFFFFCC80), Color(0xFFFFD54F)],

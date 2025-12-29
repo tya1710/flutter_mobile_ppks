@@ -48,7 +48,7 @@ class _Signup2PageState extends State<Signup2Page> {
                 child: Column(
                   children: [
                     Image.asset(
-                      'assets/images/logo (2).png',
+                      'assets/images/logo.png',
                       height: 100,
                     ),
                     const SizedBox(height: 10),

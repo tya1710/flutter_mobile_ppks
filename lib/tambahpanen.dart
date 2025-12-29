@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'catatrawat.dart'; 
+import 'catatrawat.dart';
+
+// ⬇️ tambahan import untuk SQLite
+import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart' as p;
 
 class TambahPanenPage extends StatefulWidget {
   const TambahPanenPage({super.key});
@@ -14,6 +18,37 @@ class _TambahPanenPageState extends State<TambahPanenPage> {
   final TextEditingController _beratController = TextEditingController();
   final TextEditingController _hargaController = TextEditingController();
   final TextEditingController _upahController = TextEditingController();
+
+  // ⬇️ pegang instance database di sini
+  Database? _database;
+
+  Future<Database> get _db async {
+    if (_database != null) return _database!;
+    _database = await _initDb();
+    return _database!;
+  }
+
+  // ⬇️ inisialisasi database & buat tabel kalau belum ada
+  Future<Database> _initDb() async {
+    final dbPath = await getDatabasesPath();
+    final path = p.join(dbPath, 'panen.db');
+
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: (db, version) async {
+        await db.execute('''
+          CREATE TABLE panen (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            tanggal TEXT,
+            berat REAL,
+            harga REAL,
+            upah REAL
+          )
+        ''');
+      },
+    );
+  }
 
   @override
   void dispose() {
@@ -40,11 +75,24 @@ class _TambahPanenPageState extends State<TambahPanenPage> {
     }
   }
 
-  void _simpanData() {
+  // ⬇️ versi baru: simpan ke SQLite
+  Future<void> _simpanData() async {
     if (_formKey.currentState!.validate()) {
+      final db = await _db;
+
+      // siapkan data yang mau disimpan
+      final data = {
+        'tanggal': _tanggalController.text,
+        'berat': double.parse(_beratController.text),
+        'harga': double.parse(_hargaController.text),
+        'upah': double.parse(_upahController.text),
+      };
+
+      await db.insert('panen', data);
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text("Data panen berhasil disimpan"),
+          content: Text("Data panen berhasil disimpan ke database"),
           backgroundColor: Colors.green,
         ),
       );
@@ -164,7 +212,7 @@ class _TambahPanenPageState extends State<TambahPanenPage> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: _simpanData,
+                  onPressed: _simpanData, // ⬅️ tetap sama, tapi sekarang nyimpan ke DB
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
                     foregroundColor: Colors.white,
@@ -182,7 +230,7 @@ class _TambahPanenPageState extends State<TambahPanenPage> {
 
               const SizedBox(height: 20),
 
-              // 🌱 Tombol Catat Rawat (➡ langsung ke catatrawat.dart)
+              // 🌱 Tombol Catat Rawat
               SizedBox(
                 width: double.infinity,
                 child: OutlinedButton.icon(
@@ -190,7 +238,9 @@ class _TambahPanenPageState extends State<TambahPanenPage> {
                   label: const Text(
                     "Catat Rawat",
                     style: TextStyle(
-                        color: Colors.green, fontWeight: FontWeight.bold),
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   style: OutlinedButton.styleFrom(
                     side: const BorderSide(color: Colors.green, width: 2),
@@ -200,7 +250,6 @@ class _TambahPanenPageState extends State<TambahPanenPage> {
                     ),
                   ),
                   onPressed: () {
-                    // ✅ Navigasi langsung ke halaman Catat Rawat
                     Navigator.push(
                       context,
                       MaterialPageRoute(

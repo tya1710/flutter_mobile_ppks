@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'catatrawat.dart';
 
 class PerawatanPenyemprotanPage extends StatefulWidget {
   const PerawatanPenyemprotanPage({super.key});

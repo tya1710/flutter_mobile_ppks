@@ -6,7 +6,6 @@ class EditProfilPage2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -18,7 +17,7 @@ class EditProfilPage2 extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-             
+              // ===== APP BAR CUSTOM =====
               Container(
                 color: const Color(0xFF009688),
                 padding:
@@ -47,7 +46,7 @@ class EditProfilPage2 extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-             
+              // ===== FOTO PROFIL =====
               const CircleAvatar(
                 radius: 50,
                 backgroundColor: Colors.white,
@@ -60,7 +59,7 @@ class EditProfilPage2 extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-           
+              // ===== FORM =====
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
@@ -68,29 +67,29 @@ class EditProfilPage2 extends StatelessWidget {
                   children: [
                     const Text("Nama"),
                     const SizedBox(height: 5),
-                    _buildTextField(),
+                    _buildTextField(hint: "Suryani"),
 
                     const SizedBox(height: 15),
                     const Text("Email"),
                     const SizedBox(height: 5),
-                    _buildTextField(),
+                    _buildTextField(hint: "Suryanimil@gmail.com"),
 
                     const SizedBox(height: 15),
                     const Text("Bio"),
                     const SizedBox(height: 5),
-                    _buildTextField(),
+                    _buildTextField(hint: "Pengusaha"),
 
                     const SizedBox(height: 15),
                     const Text("No Handphone"),
                     const SizedBox(height: 5),
-                    _buildTextField(),
+                    _buildTextField(hint: "081344897661"),
                   ],
                 ),
               ),
 
               const SizedBox(height: 30),
 
-            
+              // ===== TOMBOL SIMPAN =====
               SizedBox(
                 width: 90,
                 height: 28,
@@ -118,12 +117,14 @@ class EditProfilPage2 extends StatelessWidget {
     );
   }
 
-  
-  static Widget _buildTextField() {
+  // ===== FIELD PUTIH =====
+  static Widget _buildTextField({String? hint}) {
     return TextField(
       decoration: InputDecoration(
         filled: true,
         fillColor: Colors.white,
+        hintText: hint,
+        hintStyle: const TextStyle(color: Colors.black54, fontSize: 13),
         isDense: true,
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 8, vertical: 8),

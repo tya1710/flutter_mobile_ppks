@@ -67,19 +67,19 @@ class LaporanDetailPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               elevation: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(14),
+              child: const Padding(
+                padding: EdgeInsets.all(14),
                 child: Column(
                   children: [
-                    const Text(
+                    Text(
                       "Pendapatan Bersih Anda",
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 15,
                       ),
                     ),
-                    const SizedBox(height: 5),
-                    const Text(
+                    SizedBox(height: 5),
+                    Text(
                       "Rp.",
                       style: TextStyle(
                         fontSize: 20,
@@ -87,17 +87,17 @@ class LaporanDetailPage extends StatelessWidget {
                         color: Colors.green,
                       ),
                     ),
-                    const Divider(thickness: 1),
+                    Divider(thickness: 1),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text("Total Pendapatan"),
                         Text("Rp."),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text("Total Pengeluaran"),
                         Text("Rp."),
                       ],
@@ -137,20 +137,20 @@ class LaporanDetailPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               elevation: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(14),
+              child: const Padding(
+                padding: EdgeInsets.all(14),
                 child: Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text("Total Berat TBS"),
                         Text("Kg"),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text("Rata rata harga TBS"),
                         Text("Rp"),
                       ],
@@ -190,34 +190,34 @@ class LaporanDetailPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               elevation: 2,
-              child: Padding(
-                padding: const EdgeInsets.all(14),
+              child: const Padding(
+                padding: EdgeInsets.all(14),
                 child: Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text("Panen"),
                         Text("Rp"),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text("Upah Panen"),
                         Text("Rp"),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text("Upah Langsir"),
                         Text("Rp"),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Text("Biaya Langsir"),
                         Text("Rp"),
                       ],

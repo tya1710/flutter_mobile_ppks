@@ -24,7 +24,8 @@ class _TampilanAwalState extends State<TampilanAwal> {
     Timer(const Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const LoginPage()),
+        MaterialPageRoute(builder: (context) => LoginPage())
+,
       );
     });
   }
@@ -50,7 +51,7 @@ class _TampilanAwalState extends State<TampilanAwal> {
           children: [
             // LOGO
             Image.asset(
-              'assets/images/logo (2).png',
+              'assets/images/logo.png',
               width: 250,
             ),
             const SizedBox(height: 8), // 🔥 jarak dikurangi (lebih dekat)

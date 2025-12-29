@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CLIENT_ID</key>
+	<string>http://1000735152762-gsro7gikp6itbmfj23uvvqepr3omjnmo.apps.googleusercontent.com</string>
 	<key>CFBundleDisplayName</key>
 	<string>Flutter Mobile Ppks</string>
 	<key>CFBundleExecutable</key>

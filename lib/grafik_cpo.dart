@@ -26,9 +26,9 @@ class GrafikCPOPage extends StatelessWidget {
             Expanded(
               child: LineChart(
                 LineChartData(
-                  gridData: FlGridData(show: true),
+                  gridData: const FlGridData(show: true),
                   titlesData: FlTitlesData(
-                    leftTitles: AxisTitles(
+                    leftTitles: const AxisTitles(
                       sideTitles: SideTitles(showTitles: true, reservedSize: 40),
                     ),
                     bottomTitles: AxisTitles(
@@ -69,7 +69,7 @@ class GrafikCPOPage extends StatelessWidget {
                       color: Colors.green,
                       barWidth: 3,
                       belowBarData: BarAreaData(show: true, color: Colors.greenAccent.withOpacity(0.3)),
-                      dotData: FlDotData(show: true),
+                      dotData: const FlDotData(show: true),
                     ),
                   ],
                 ),

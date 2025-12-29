@@ -77,9 +77,9 @@ class _Riwayat2PageState extends State<Riwayat2Page> {
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
+              children: [
                 Text("Kebun"),
                 Text("Rating", style: TextStyle(color: Colors.green)),
               ],

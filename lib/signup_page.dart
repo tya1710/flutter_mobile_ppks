@@ -16,7 +16,7 @@ class SignupPage extends StatelessWidget {
                 const SizedBox(height: 80),
 
                 Image.asset(
-                  'assets/images/logo (2).png',
+                  'assets/images/logo.png',
                   height: 100,
                 ),
                 const SizedBox(height: 10),
